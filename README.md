@@ -35,6 +35,13 @@ replacing the default credentials with whatever your choices are for local devel
 
 To create a local instance of the S!zzle database, use MySQL Workbench's Schema Transfer Wizard.
 
+Alternatively, the following command will create a local instance of the S!zzle database (You must first create a database before running or you will receive the error `ERROR 1049 (42000): Unknown database 'giftbox'`):
+
+```
+mysqldump -h {remote database host} -u {remote database username} -p {remote database password} giftbox \
+| mysql  -h {local database host} -u {local database user} -p {local database password} -P {local database port} giftbox
+```
+
 ### Apache
 
 If on a Mac, you can update `/etc/apache2/extra/httpd-vhosts.conf` to include something like
