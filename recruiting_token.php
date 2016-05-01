@@ -297,20 +297,30 @@
                   </button>
                   <paper-dialog class="interest-dialog" modal>
                       <div class="interest-form">
-                        <center><h2>Interested in this job?</h2></center>
-                        <paper-radio-group selected="Yes" id="interest-response">
-                          <paper-radio-button class="interest-radio-button" name="Yes" value="yes">Yes, I'm interested</paper-radio-button><br />
-                          <paper-radio-button class="interest-radio-button" name="Maybe" value="maybe">Maybe</paper-radio-button><br />
-                          <paper-radio-button class="interest-radio-button" name="No" value="no">No, not for me</paper-radio-button>
-                        </paper-radio-group>
-                        <paper-input
-                          type="email"
-                          class="email-paper-input"
-                          label="email address"
-                          autofocus
-                          error-message="Please input a valid email"
-                          required>
-                        </paper-input>
+                        <ul class="interest-slides">
+                          <li class="interest-main">
+                            <center><h2>Interested in this job?</h2></center>
+                            <paper-radio-group selected="Yes" id="interest-response">
+                              <paper-radio-button class="interest-radio-button" name="Yes" value="yes">Yes, I'm interested</paper-radio-button><br />
+                              <paper-radio-button class="interest-radio-button" name="Maybe" value="maybe">Maybe</paper-radio-button><br />
+                              <paper-radio-button class="interest-radio-button" name="No" value="no">No, not for me</paper-radio-button>
+                            </paper-radio-group>
+                            <paper-input
+                                type="email"
+                                class="email-paper-input"
+                                label="email address"
+                                autofocus
+                                error-message="Please input a valid email"
+                                required>
+                            </paper-input>
+                          </li><li class="interest-disinterested" style="display:none">
+                            <center><h2>2 of 2</h2></center>
+                            <paper-radio-group selected="bad_time" id="disinterest-response">
+                              <paper-radio-button class="disinterest-radio-button" name="bad_time" value="bad_time">Bad Time</paper-radio-button><br />
+                              <paper-radio-button class="disinterest-radio-button" name="different_company" value="different_company">Different Company</paper-radio-button><br />
+                              <paper-radio-button class="disinterest-radio-button" name="wrong_job" value="wrong_job">Wrong Job</paper-radio-button>
+                            </paper-radio-group>
+                        </ul>
                       </div>
                       <div class="buttons">
                         <paper-button
@@ -341,20 +351,30 @@
               </button>
               <paper-dialog class="interest-dialog" modal>
                   <div class="interest-form">
-                    <center><h2>Interested in this job?</h2></center>
-                    <paper-radio-group selected="Yes" id="interest-response">
-                      <paper-radio-button class="interest-radio-button" name="Yes" value="yes">Yes, I'm interested</paper-radio-button><br />
-                      <paper-radio-button class="interest-radio-button" name="Maybe" value="maybe">Maybe</paper-radio-button><br />
-                      <paper-radio-button class="interest-radio-button" name="No" value="no">No, not for me</paper-radio-button>
-                    </paper-radio-group>
-                    <paper-input
-                      type="email"
-                      class="email-paper-input"
-                      label="email address"
-                      autofocus
-                      error-message="Please input a valid email"
-                      required>
-                    </paper-input>
+                    <ul class="interest-slides">
+                      <li class="interest-main">
+                        <center><h2>Interested in this job?</h2></center>
+                        <paper-radio-group selected="Yes" id="interest-response">
+                          <paper-radio-button class="interest-radio-button" name="Yes" value="yes">Yes, I'm interested</paper-radio-button><br />
+                          <paper-radio-button class="interest-radio-button" name="Maybe" value="maybe">Maybe</paper-radio-button><br />
+                          <paper-radio-button class="interest-radio-button" name="No" value="no">No, not for me</paper-radio-button>
+                        </paper-radio-group>
+                        <paper-input
+                            type="email"
+                            class="email-paper-input"
+                            label="email address"
+                            autofocus
+                            error-message="Please input a valid email"
+                            required>
+                        </paper-input>
+                      </li><li class="interest-disinterested" style="display:none">
+                        <center><h2>2 of 2</h2></center>
+                        <paper-radio-group selected="bad_time" id="disinterest-response">
+                          <paper-radio-button class="disinterest-radio-button" name="bad_time" value="bad_time">Bad Time</paper-radio-button><br />
+                          <paper-radio-button class="disinterest-radio-button" name="different_company" value="different_company">Different Company</paper-radio-button><br />
+                          <paper-radio-button class="disinterest-radio-button" name="wrong_job" value="wrong_job">Wrong Job</paper-radio-button>
+                        </paper-radio-group>
+                    </ul>
                   </div>
                   <div class="buttons">
                     <paper-button
@@ -382,20 +402,30 @@
               </button>
               <paper-dialog class="interest-dialog" modal>
                   <div class="interest-form">
-                    <center><h2>Interested in this job?</h2></center>
-                    <paper-radio-group selected="Yes" id="interest-response">
-                      <paper-radio-button class="interest-radio-button" name="Yes" value="yes">Yes, I'm interested</paper-radio-button><br />
-                      <paper-radio-button class="interest-radio-button" name="Maybe" value="maybe">Maybe</paper-radio-button><br />
-                      <paper-radio-button class="interest-radio-button" name="No" value="no">No, not for me</paper-radio-button>
-                    </paper-radio-group>
-                    <paper-input
-                      type="email"
-                      class="email-paper-input"
-                      label="email address"
-                      autofocus
-                      error-message="Please input a valid email"
-                      required>
-                    </paper-input>
+                    <ul class="interest-slides">
+                      <li class="interest-main">
+                        <center><h2>Interested in this job?</h2></center>
+                        <paper-radio-group selected="Yes" id="interest-response">
+                          <paper-radio-button class="interest-radio-button" name="Yes" value="yes">Yes, I'm interested</paper-radio-button><br />
+                          <paper-radio-button class="interest-radio-button" name="Maybe" value="maybe">Maybe</paper-radio-button><br />
+                          <paper-radio-button class="interest-radio-button" name="No" value="no">No, not for me</paper-radio-button>
+                        </paper-radio-group>
+                        <paper-input
+                            type="email"
+                            class="email-paper-input"
+                            label="email address"
+                            autofocus
+                            error-message="Please input a valid email"
+                            required>
+                        </paper-input>
+                      </li><li class="interest-disinterested" style="display:none">
+                        <center><h2>2 of 2</h2></center>
+                        <paper-radio-group selected="bad_time" id="disinterest-response">
+                          <paper-radio-button class="disinterest-radio-button" name="bad_time" value="bad_time">Bad Time</paper-radio-button><br />
+                          <paper-radio-button class="disinterest-radio-button" name="different_company" value="different_company">Different Company</paper-radio-button><br />
+                          <paper-radio-button class="disinterest-radio-button" name="wrong_job" value="wrong_job">Wrong Job</paper-radio-button>
+                        </paper-radio-group>
+                    </ul>
                   </div>
                   <div class="buttons">
                     <paper-button
@@ -423,20 +453,30 @@
               </button>
               <paper-dialog class="interest-dialog" modal>
                   <div class="interest-form">
-                    <center><h2>Interested in this job?</h2></center>
-                    <paper-radio-group selected="Yes" id="interest-response">
-                      <paper-radio-button class="interest-radio-button" name="Yes" value="yes">Yes, I'm interested</paper-radio-button><br />
-                      <paper-radio-button class="interest-radio-button" name="Maybe" value="maybe">Maybe</paper-radio-button><br />
-                      <paper-radio-button class="interest-radio-button" name="No" value="no">No, not for me</paper-radio-button>
-                    </paper-radio-group>
-                    <paper-input
-                      type="email"
-                      class="email-paper-input"
-                      label="email address"
-                      autofocus
-                      error-message="Please input a valid email"
-                      required>
-                    </paper-input>
+                    <ul class="interest-slides">
+                      <li class="interest-main">
+                        <center><h2>Interested in this job?</h2></center>
+                        <paper-radio-group selected="Yes" id="interest-response">
+                          <paper-radio-button class="interest-radio-button" name="Yes" value="yes">Yes, I'm interested</paper-radio-button><br />
+                          <paper-radio-button class="interest-radio-button" name="Maybe" value="maybe">Maybe</paper-radio-button><br />
+                          <paper-radio-button class="interest-radio-button" name="No" value="no">No, not for me</paper-radio-button>
+                        </paper-radio-group>
+                        <paper-input
+                            type="email"
+                            class="email-paper-input"
+                            label="email address"
+                            autofocus
+                            error-message="Please input a valid email"
+                            required>
+                        </paper-input>
+                      </li><li class="interest-disinterested" style="display:none">
+                        <center><h2>2 of 2</h2></center>
+                        <paper-radio-group selected="bad_time" id="disinterest-response">
+                          <paper-radio-button class="disinterest-radio-button" name="bad_time" value="bad_time">Bad Time</paper-radio-button><br />
+                          <paper-radio-button class="disinterest-radio-button" name="different_company" value="different_company">Different Company</paper-radio-button><br />
+                          <paper-radio-button class="disinterest-radio-button" name="wrong_job" value="wrong_job">Wrong Job</paper-radio-button>
+                        </paper-radio-group>
+                    </ul>
                   </div>
                   <div class="buttons">
                     <paper-button
@@ -463,35 +503,45 @@
                 <i class="material-icons">thumb_up</i>
               </button>
               <paper-dialog class="interest-dialog" modal>
-                  <div class="interest-form">
-                    <center><h2>Interested in this job?</h2></center>
-                    <paper-radio-group selected="Yes" id="interest-response">
-                      <paper-radio-button class="interest-radio-button" name="Yes" value="yes">Yes, I'm interested</paper-radio-button><br />
-                      <paper-radio-button class="interest-radio-button" name="Maybe" value="maybe">Maybe</paper-radio-button><br />
-                      <paper-radio-button class="interest-radio-button" name="No" value="no">No, not for me</paper-radio-button>
-                    </paper-radio-group>
-                    <paper-input
-                      type="email"
-                      class="email-paper-input"
-                      label="email address"
-                      autofocus
-                      error-message="Please input a valid email"
-                      required>
-                    </paper-input>
-                  </div>
-                  <div class="buttons">
-                    <paper-button
+                <div class="interest-form">
+                  <ul class="interest-slides">
+                    <li class="interest-main">
+                      <center><h2>Interested in this job?</h2></center>
+                      <paper-radio-group selected="Yes" id="interest-response">
+                        <paper-radio-button class="interest-radio-button" name="Yes" value="yes">Yes, I'm interested</paper-radio-button><br />
+                        <paper-radio-button class="interest-radio-button" name="Maybe" value="maybe">Maybe</paper-radio-button><br />
+                        <paper-radio-button class="interest-radio-button" name="No" value="no">No, not for me</paper-radio-button>
+                      </paper-radio-group>
+                      <paper-input
+                          type="email"
+                          class="email-paper-input"
+                          label="email address"
+                          autofocus
+                          error-message="Please input a valid email"
+                          required>
+                      </paper-input>
+                    </li><li class="interest-disinterested" style="display:none">
+                      <center><h2>2 of 2</h2></center>
+                      <paper-radio-group selected="bad_time" id="disinterest-response">
+                        <paper-radio-button class="disinterest-radio-button" name="bad_time" value="bad_time">Bad Time</paper-radio-button><br />
+                        <paper-radio-button class="disinterest-radio-button" name="different_company" value="different_company">Different Company</paper-radio-button><br />
+                        <paper-radio-button class="disinterest-radio-button" name="wrong_job" value="wrong_job">Wrong Job</paper-radio-button>
+                      </paper-radio-group>
+                  </ul>
+                </div>
+                <div class="buttons">
+                  <paper-button
                       class="submit-interest-button"
                       on-click="_submitInterest">
-                      Submit
-                    </paper-button>
-                    <paper-button
+                    Submit
+                  </paper-button>
+                  <paper-button
                       class="dismiss-interest-button"
                       dialog-dismiss
                       on-click="_closeInterestDialog">
-                      Cancel
-                    </paper-button>
-                  </div>
+                    Cancel
+                  </paper-button>
+                </div>
               </paper-dialog>
             </div>
           </description-x-card>

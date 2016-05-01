@@ -185,6 +185,8 @@ scope._onInterestClick = function(event) {
  * Submits interest info
  */
 scope._submitInterest = function (event) {
+  // Don't run if on second page.
+  if ($('.interest-main').css('display') === 'none') return;
   var formIndex = 0;
   var eventPath = [];
   if (event.path !== undefined) {
@@ -222,22 +224,75 @@ scope._submitInterest = function (event) {
   }
   event.preventDefault();
   if ($('.email-paper-input')[formIndex].validate()) {
-    $('.submit-interest-button').addClass('disable-clicks');
-    url = '/ajax/recruiting_token_response/create' + path[4];
-    url += '/' + encodeURIComponent($('.email-paper-input')[formIndex].value);
-    url += '/' + $('#interest-response')[0].selectedItem.value;
-    $.post(url, '', function(data) {
-      if (data.data.id !== undefined & data.data.id > 0) {
-        $('.interest-form').text('Thanks for your interest!');
-        $('.submit-interest-button').remove();
-        $('.dismiss-interest-button').text('DISMISS');
-        $('.interest-fab').remove();
-      } else {
-        $('.submit-interest-button').removeClass('disable-clicks');
-      }
-    },'json');
+    onValidInterestForm(path, formIndex);
   }
 };
+
+/**
+ * Get value from form, and either submit it immediately or open the disinterested-reason part of the form.
+ * @param path
+ * @param formIndex
+ */
+function onValidInterestForm(path, formIndex) {
+  var value = $('#interest-response')[0].selectedItem.value,
+    url = '/ajax/recruiting_token_response/create' + path[4] +
+          '/' + encodeURIComponent($('.email-paper-input')[formIndex].value);
+
+  if (value === 'no') {
+    showDisinterestForm(function (reason) {
+      sendInterestForm(url, value, reason);
+    });
+  } else {
+    sendInterestForm(url, value);
+  }
+}
+
+/**
+ * Send the interest form data.
+ * @param baseUrl
+ * @param value
+ * @param reason (optional)
+ */
+function sendInterestForm(baseUrl, value, reason) {
+  $('.submit-interest-button').addClass('disable-clicks');
+  var url = baseUrl + '/' + value + (reason ? '-' + reason : '');
+  $.post(url, '', function(data) {
+    if (data.data.id !== undefined & data.data.id > 0) {
+      $('.interest-form').text('Thanks for your interest!');
+      $('.submit-interest-button').off('click.disinterested').remove();
+      $('.dismiss-interest-button').off('click.disinterested').text('DISMISS');
+      $('.interest-fab').remove();
+    } else {
+      $('.submit-interest-button').removeClass('disable-clicks');
+    }
+  },'json');
+}
+
+/**
+ * Show the disinterested portion of the form.
+ * @param cb Callback to be called with the reason value selected
+ */
+function showDisinterestForm(cb) {
+  $('.interest-main').hide();
+  $('.interest-disinterested').show();
+
+  $('.submit-interest-button').on('click.disinterested', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    $('.submit-interest-button').off('click.disinterested');
+    var reason = $('#disinterest-response')[0].selectedItem.value;
+    cb(reason);
+  });
+
+  $('.dismiss-interest-button').on('click.disinterested', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    $('.submit-interest-button').off('click.disinterested');
+    $('.dismiss-interest-button').off('click.disinterested');
+    $('.interest-main').show();
+    $('.interest-disinterested').hide();
+  });
+}
 
 /**
  * Closes the interest dialog
