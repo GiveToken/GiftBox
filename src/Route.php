@@ -152,15 +152,21 @@ class Route
             case 'token':
                 $userAgent = $_SERVER['HTTP_USER_AGENT'] ?? '';
                 if (isset($this->endpointPieces[2],$this->endpointPieces[3]) && 'recruiting' == $this->endpointPieces[2]) {
-                    $detect = new \Mobile_Detect;
-                    if ($detect->isMobile()
+                    $mobileDetect = new \Mobile_Detect;
+                    $browserDetect = new \Sinergi\BrowserDetector\Browser;
+                    if ($mobileDetect->isMobile()
                         && strpos($userAgent, 'AppleWebKit') !== false
                         && strpos($userAgent, 'Safari') === false
                         && strpos($userAgent, 'Chrome') === false
                         && strpos($userAgent, 'iPhone') === false
                     ) {
                         // don't display in native android browser
-                        include __DIR__.'/../get_chrome.html';
+                        include __DIR__ . '/../get_chrome.html';
+                    } else if ($browserDetect->getName() === \Sinergi\BrowserDetector\Browser::IE
+                                && $browserDetect->getVersion() < 10
+                    ) {
+                        // don't display in IE <10
+                        include __DIR__ . '/../get_chrome.html';
                     } else if (strpos($userAgent, 'LinkedInBot') !== false) {
                         // display simplified form on LinkedIn
                         $long_id = trim($this->endpointPieces[3], '/');
