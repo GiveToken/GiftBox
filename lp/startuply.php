@@ -49,17 +49,6 @@ if (logged_in()) {
     <script src="assets2/js/html5shiv.js"></script>
     <script src="assets2/js/respond.min.js"></script>
   <![endif]-->
-  <!-- OUTDATED-BROWSER CHECK == https://browser-update.org/#install -->
-  <script>
-    var $buoop = {c:2};
-    function $buo_f(){
-      var e = document.createElement("script");
-      e.src = "//browser-update.org/update.min.js";
-      document.body.appendChild(e);
-    }
-    try {document.addEventListener("DOMContentLoaded", $buo_f,false)}
-    catch(e){window.attachEvent("onload", $buo_f)}
-  </script>
 </head>
 
 <body id="landing-page" class="landing-page">
