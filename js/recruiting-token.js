@@ -141,10 +141,20 @@ scope._onVideosClick = function(event) {
 /**
  * Opens the interest dialog
  */
-scope._onInterestClick = function(event) {
-  $('.interest-dialog').each(function (i, dialog){
-    dialog.open();
-  });
+scope._onInterestClick0 = function (event) {
+  $('.interest-dialog')[0].open();
+};
+scope._onInterestClick1= function (event) {
+  $('.interest-dialog')[1].open();
+};
+scope._onInterestClick2 = function (event) {
+  $('.interest-dialog')[2].open();
+};
+scope._onInterestClick3 = function (event) {
+  $('.interest-dialog')[3].open();
+};
+scope._onInterestClick4 = function (event) {
+  $('.interest-dialog')[4].open();
 };
 
 /**
@@ -588,6 +598,7 @@ function handleAjaxUserGetRecruiterProfile(data) {
   } else {
     $('#recruiter-section').remove();
   }
+  updateSectionPositions();
 }
 
 /**
@@ -602,6 +613,18 @@ function handleAjaxRecruitingTokenGet(data) {
   var tokenTitle;
   if (dataExists(data.data.company)) {
     $('.gt-info-company').text(data.data.company);
+    if (data.data.company.length > 36 && $(window).width() > 800) {
+      $('#supporting-company').css('height','100px');
+      $('#supporting-company').css('margin-top','217px');
+    } else if (data.data.company.length > 18 && $(window).width() <= 800) {
+      if (data.data.company.length > 36) {
+        $('#supporting-company').css('height','150px');
+        $('#supporting-company').css('margin-top','167px');
+      } else {
+        $('#supporting-company').css('height','100px');
+        $('#supporting-company').css('margin-top','217px');
+      }
+    }
     tokenTitle = data.data.company+' - '+data.data.job_title;
   } else {
     tokenTitle = data.data.job_title;
@@ -849,6 +872,69 @@ function handleAjaxRecruitingTokenGet(data) {
   } else {
     $('#recruiter-section').remove();
   }
+  updateSectionPositions();
+  setTimeout(updateSectionPositions, 500);//for slow ajax responses
+  setTimeout(updateSectionPositions, 1000);//for slow ajax responses
+  setTimeout(updateSectionPositions, 5000);//for slow ajax responses
+}
+
+/**
+ * Responsible for ordering the page sections after populating the token.
+ */
+function updateSectionPositions() {
+  var wrapper = document.getElementById('ordered-sections'),
+      ordered = [],
+    /*
+     * sectionPriority
+     *
+     * Each member of this semi-ordered array is either an id or an object with an id and a position.
+     * If the member is an id, or if position === false, then the section will appear in order.
+     * If the member has an explicit position, then the section will be placed in that position, and the rest of
+     * the sections will flow around it.
+     *
+     */
+    sectionPriority =
+    [
+      'company-section',
+      'recruiter-section',
+      'location-section',
+      'doublet-location-section',
+      'triplet-location-section',
+      'image-video-section',
+      {
+        id: 'job-description-section',
+        position: 1
+      },
+      {
+        id: 'social-section',
+        position: 2
+      }
+    ];
+
+  sectionPriority.forEach(function(section) {
+    var position = typeof section === 'string' ? false : section.position,
+        section_id = typeof section === 'string' ? section : section.id,
+        section_el = document.getElementById(section_id);
+
+    if (elementIsPresent(section_el) === false) return;
+
+    if (position === false) {
+      ordered.push(section_el);
+    } else {
+      ordered = ordered.slice(0, position).concat(section_el).concat(ordered.slice(position));
+    }
+  });
+
+  ordered.forEach(wrapper.appendChild.bind(wrapper));
+}
+
+/**
+ * Determines whether an element is present and visible on the page
+ * @param {HTMLElement} section_el
+ * @returns {boolean}
+ */
+function elementIsPresent(section_el) {
+  return (section_el !== null) && (section_el.style.display !== 'none');
 }
 
 /**
