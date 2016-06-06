@@ -145,6 +145,7 @@ scope._onVideosClick = function(event) {
 
     }
   });
+  smallScreen();
 };
 
 /**
@@ -169,8 +170,7 @@ scope._onInterestClick4 = function (event) {
 /**
  * Submits interest info
  */
-scope._submitInterest = submitInterest;
-function submitInterest(event) {
+scope._submitInterest = function (event) {
   var formIndex = 0;
   var eventPath = [];
   if (event.path !== undefined) {
@@ -216,13 +216,27 @@ function submitInterest(event) {
     $.post(url, '', function(data) {
       if (data.data.id !== undefined & data.data.id > 0) {
         if (response == 'yes' || response == 'maybe') {
-          if ('' !== applicationLink) {
-            window.location.href = applicationLink;
-          } else {
-            $('.interest-form').text('Thanks for you interest!');
-            $('.submit-interest-button').remove();
-            $('.dismiss-interest-button').text('DISMISS');
-          }
+          // look for application link
+          $.post(
+            '/ajax/recruiting_token/get_apply_link' + path[4],
+            '',
+            function(data) {
+              if (data.data !== undefined) {
+                applicationLink = data.data;
+              }
+              if ('' !== applicationLink) {
+                $('.interest-form').text('Would you like to submit an application?');
+                $('.interest-form').css('margin-bottom','30px');
+                $('.submit-interest-button').remove();
+                $('.apply-button').removeAttr('hidden');
+              } else {
+                $('.interest-form').text('Thanks for you interest!');
+                $('.submit-interest-button').remove();
+                $('.dismiss-interest-button').text('DISMISS');
+              }
+            },
+            'json'
+          );
         } else {
           $('.interest-form').text('Thanks for telling us!');
           $('.submit-interest-button').remove();
@@ -234,7 +248,7 @@ function submitInterest(event) {
       }
     },'json');
   }
-}
+};
 
 /**
  * Forwards the user to the application page
@@ -242,11 +256,7 @@ function submitInterest(event) {
 var applicationLink = '';
 scope._applyNow = function (event) {
   if ('' !== applicationLink) {
-    if ($('.email-paper-input').length) {
-      submitInterest(event);
-    } else {
-      window.location.href = applicationLink;
-    }
+    window.location.href = applicationLink;
   } else {
     $('.apply-button').remove();
     $('.interest-form').text('An error has occured forwarding you to the application.');
@@ -340,22 +350,6 @@ function loadDataAndPopulateToken() {
     });
     url = '/ajax/recruiting_token/get_responses_allowed' + path[4];
     $.post(url, '', handleAjaxRecruitingTokenGetResponsedAllowed, 'json');
-    $.post(
-      '/ajax/recruiting_token/get_apply_link' + path[4],
-      '',
-      function(data) {
-        if (data.data !== undefined) {
-          applicationLink = data.data;
-        }
-        if ('' !== applicationLink) {
-          $('.submit-interest-button').remove();
-          $('.apply-button').removeAttr('hidden');
-          $('.apply-button').text('APPLY');
-          $('.apply-button').removeClass('apply-button');
-        }
-      },
-      'json'
-    );
     url = '/ajax/recruiting_token/get_videos' + path[4];
     $.post(url, '', function(data) {
       if (data.data !== undefined && data.data.length > 0) {
