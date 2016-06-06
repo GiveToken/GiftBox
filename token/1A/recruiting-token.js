@@ -81,6 +81,7 @@ scope._onLocationClick = function(event) {
   };
   this.$.pages.selected = 1;
   $('google-map').resize();
+  smallScreen();
 };
 
 scope._onImagesClick = function(event) {
@@ -101,6 +102,7 @@ scope._onImagesClick = function(event) {
 
     }
   });
+  smallScreen();
 };
 
 scope._onVideosClick = function(event) {
@@ -143,6 +145,7 @@ scope._onVideosClick = function(event) {
 
     }
   });
+  smallScreen();
 };
 
 /**
@@ -384,6 +387,9 @@ function smallScreen() {
     $('.back-button-lower').addClass('back-button-lower-right');
     $('.back-button-lower-right').removeClass('back-button-lower');
   }
+  $('.interest-dialog').each(function(i, dialog) {
+      dialog.close();
+  });
 }
 
 /**
