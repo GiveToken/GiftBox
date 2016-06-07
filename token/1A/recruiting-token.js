@@ -15,7 +15,6 @@ scope._onOverviewClick = function(event) {
   };
   this.$.pages.selected = 4;
   smallScreen();
-  closeInterestDialog();
 };
 
 scope._onSkillsClick = function(event) {
@@ -27,7 +26,6 @@ scope._onSkillsClick = function(event) {
   };
   this.$.pages.selected = 4;
   smallScreen();
-  closeInterestDialog();
 };
 
 scope._onValuesClick = function(event) {
@@ -39,7 +37,6 @@ scope._onValuesClick = function(event) {
   };
   this.$.pages.selected = 4;
   smallScreen();
-  closeInterestDialog();
 };
 
 scope._onResponsibilitiesClick = function(event) {
@@ -51,7 +48,6 @@ scope._onResponsibilitiesClick = function(event) {
   };
   this.$.pages.selected = 4;
   smallScreen();
-  closeInterestDialog();
 };
 
 scope._onPerksClick = function(event) {
@@ -63,7 +59,6 @@ scope._onPerksClick = function(event) {
   };
   this.$.pages.selected = 4;
   smallScreen();
-  closeInterestDialog();
 };
 
 scope._onLocationClick = function(event) {
@@ -86,7 +81,6 @@ scope._onLocationClick = function(event) {
   };
   this.$.pages.selected = 1;
   $('google-map').resize();
-  closeInterestDialog();
 };
 
 scope._onImagesClick = function(event) {
@@ -107,7 +101,6 @@ scope._onImagesClick = function(event) {
 
     }
   });
-  closeInterestDialog();
 };
 
 scope._onVideosClick = function(event) {
@@ -150,7 +143,6 @@ scope._onVideosClick = function(event) {
 
     }
   });
-  closeInterestDialog();
 };
 
 /**
@@ -392,15 +384,6 @@ function smallScreen() {
     $('.back-button-lower').addClass('back-button-lower-right');
     $('.back-button-lower-right').removeClass('back-button-lower');
   }
-}
-
-/**
- * Closes interest dialog after subsequent clicks
- */
-function closeInterestDialog() {
-  $('.interest-dialog').each(function(i, dialog) {
-    dialog.close();
-  });
 }
 
 /**
