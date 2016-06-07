@@ -305,6 +305,14 @@ $(document).ready(function(){
   });
 });
 
+  // closes dialog box on click (iOS patch)
+  $(this).click(function() {
+    $('.interest-dialog').each(function(i, dialog) {
+      dialog.close();
+      $(this).remove();
+    });
+  });
+
 /**
  * Handle loading the token data and putting it where it should go
  */
