@@ -168,6 +168,7 @@ scope._onInterestClick4 = function (event) {
  * Submits interest info
  */
 scope._submitInterest = function (event) {
+  presentedInterestPopup = true;
   var formIndex = 0;
   var eventPath = [];
   if (event.path !== undefined) {
@@ -267,6 +268,7 @@ scope._applyNow = function (event) {
 scope._closeInterestDialog = function (event) {
   $('.interest-dialog').each(function (i, dialog){
     dialog.close();
+    presentedInterestPopup = true;
   });
 };
 
@@ -978,16 +980,17 @@ function handleAjaxRecruitingTokenGetResponsedAllowed(data) {
     if ('false' == data.data.allowed) {
       $('.interest-fab').hide();
     } else {
-      // display the response form once after 10 seconds
-      if (!presentedInterestPopup) {
-        setTimeout(function(){
-          $('.interest-dialog').each(function (i, dialog){
+      // display the response form once after 10 seconds if the user
+      // has not already opened it
+      setTimeout(function(){
+        $('.interest-dialog').each(function (i, dialog){
+          if (!presentedInterestPopup) {
             dialog.open();
-          });
-        },
-        10000);
-        presentedInterestPopup = true;
-      }
+            presentedInterestPopup = true;
+          }
+        });
+      },
+      10000);
     }
   }
 }
