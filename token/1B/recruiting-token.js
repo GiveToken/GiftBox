@@ -1,5 +1,6 @@
 var scope = document.querySelector('template[is="dom-bind"]');
 var presentedInterestPopup = false;
+var openedInterestPopup = false;
 var cities = [];
 
 scope._onTrack = function(event) {
@@ -151,22 +152,27 @@ scope._onVideosClick = function(event) {
 scope._onInterestClick0 = function (event) {
   $('.interest-dialog')[0].open();
   presentedInterestPopup = true;
+  openedInterestPopup = true;
 };
 scope._onInterestClick1= function (event) {
   $('.interest-dialog')[1].open();
   presentedInterestPopup = true;
+  openedInterestPopup = true;
 };
 scope._onInterestClick2 = function (event) {
   $('.interest-dialog')[2].open();
   presentedInterestPopup = true;
+  openedInterestPopup = true;
 };
 scope._onInterestClick3 = function (event) {
   $('.interest-dialog')[3].open();
   presentedInterestPopup = true;
+  openedInterestPopup = true;
 };
 scope._onInterestClick4 = function (event) {
   $('.interest-dialog')[4].open();
   presentedInterestPopup = true;
+  openedInterestPopup = true;
 };
 
 /**
@@ -176,6 +182,7 @@ scope._submitInterest = submitInterest;
 function submitInterest(event) {
   var formIndex = 0;
   var eventPath = [];
+  openedInterestPopup = false;
   if (event.path !== undefined) {
     // Chrome
     eventPath = event.path;
@@ -263,6 +270,7 @@ scope._applyNow = function (event) {
 scope._closeInterestDialog = function (event) {
   $('.interest-dialog').each(function (i, dialog){
     dialog.close();
+    openedInterestPopup = false;
   });
 };
 
@@ -280,6 +288,14 @@ scope._closeApplyDialog = function (event) {
  * Navigates back to the main page
  */
 scope._onBackClick = function(event) {
+  if (openedInterestPopup) {
+    // close existing dialog box and then execute the
+    // contents of the back button
+    $('.interest-dialog').each(function(i, dialog) {
+      dialog.close();
+      openedInterestPopup = false;
+    });
+  }
   $('.gt-info-video').remove();
   this.$.pages.selected = 0;
 };
@@ -996,6 +1012,7 @@ function handleAjaxRecruitingTokenGetResponsedAllowed(data) {
           if (!presentedInterestPopup) {
             $('.interest-dialog').each(function (i, dialog){
               dialog.open();
+              openedInterestPopup = true;
             });
             presentedInterestPopup = true;
           }
