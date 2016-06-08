@@ -310,7 +310,7 @@ $(document).ready(function(){
   });
 
   // closes dialog box on click (iOS patch)
-  $(this).click(function() {
+  $(this).not('.interest-fab').click(function() {
     $('.interest-dialog').each(function(i, dialog) {
       dialog.close();
       $(this).remove();
