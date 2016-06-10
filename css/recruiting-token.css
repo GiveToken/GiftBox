@@ -406,6 +406,14 @@ i.plus-icon--overlay {
   width: 100%;
 }
 
+#company-section:hover, #videos-frontpage:hover,  #images-frontpage:hover {
+  box-shadow: 4px 6px 10px 3px rgba(0,0,0,.14),0 3px 1px -2px rgba(0,0,0,.2),0 1px 5px 0 rgba(0,0,0,.12);
+}
+
+.gt-info-twitter:hover, .gt-info-facebook:hover, .gt-info-youtube:hover {
+  background:rgb(44,152,240);
+}
+
 @media screen and (min-width: 600px) {
   /* TWO COLS */
   .ImageGrid-item, .ImageGrid-itemSizer {

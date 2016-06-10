@@ -150,25 +150,29 @@ scope._onVideosClick = function(event) {
  */
 scope._onInterestClick0 = function (event) {
   $('.interest-dialog')[0].open();
+  presentedInterestPopup = true;
 };
 scope._onInterestClick1= function (event) {
   $('.interest-dialog')[1].open();
+  presentedInterestPopup = true;
 };
 scope._onInterestClick2 = function (event) {
   $('.interest-dialog')[2].open();
+  presentedInterestPopup = true;
 };
 scope._onInterestClick3 = function (event) {
   $('.interest-dialog')[3].open();
+  presentedInterestPopup = true;
 };
 scope._onInterestClick4 = function (event) {
   $('.interest-dialog')[4].open();
+  presentedInterestPopup = true;
 };
 
 /**
  * Submits interest info
  */
-scope._submitInterest = submitInterest;
-function submitInterest(event) {
+scope._submitInterest = function (event) {
   var formIndex = 0;
   var eventPath = [];
   if (event.path !== undefined) {
@@ -214,13 +218,27 @@ function submitInterest(event) {
     $.post(url, '', function(data) {
       if (data.data.id !== undefined & data.data.id > 0) {
         if (response == 'yes' || response == 'maybe') {
-          if ('' !== applicationLink) {
-            window.location.href = applicationLink;
-          } else {
-            $('.interest-form').text('Thanks for you interest!');
-            $('.submit-interest-button').remove();
-            $('.dismiss-interest-button').text('DISMISS');
-          }
+          // look for application link
+          $.post(
+            '/ajax/recruiting_token/get_apply_link' + path[4],
+            '',
+            function(data) {
+              if (data.data !== undefined) {
+                applicationLink = data.data;
+              }
+              if ('' !== applicationLink) {
+                $('.interest-form').text('Would you like to submit an application?');
+                $('.interest-form').css('margin-bottom','30px');
+                $('.submit-interest-button').remove();
+                $('.apply-button').removeAttr('hidden');
+              } else {
+                $('.interest-form').text('Thanks for you interest!');
+                $('.submit-interest-button').remove();
+                $('.dismiss-interest-button').text('DISMISS');
+              }
+            },
+            'json'
+          );
         } else {
           $('.interest-form').text('Thanks for telling us!');
           $('.submit-interest-button').remove();
@@ -232,7 +250,7 @@ function submitInterest(event) {
       }
     },'json');
   }
-}
+};
 
 /**
  * Forwards the user to the application page
@@ -240,11 +258,7 @@ function submitInterest(event) {
 var applicationLink = '';
 scope._applyNow = function (event) {
   if ('' !== applicationLink) {
-    if ($('.email-paper-input').length) {
-      submitInterest(event);
-    } else {
-      window.location.href = applicationLink;
-    }
+    window.location.href = applicationLink;
   } else {
     $('.apply-button').remove();
     $('.interest-form').text('An error has occured forwarding you to the application.');
@@ -338,22 +352,6 @@ function loadDataAndPopulateToken() {
     });
     url = '/ajax/recruiting_token/get_responses_allowed' + path[4];
     $.post(url, '', handleAjaxRecruitingTokenGetResponsedAllowed, 'json');
-    $.post(
-      '/ajax/recruiting_token/get_apply_link' + path[4],
-      '',
-      function(data) {
-        if (data.data !== undefined) {
-          applicationLink = data.data;
-        }
-        if ('' !== applicationLink) {
-          $('.submit-interest-button').remove();
-          $('.apply-button').removeAttr('hidden');
-          $('.apply-button').text('APPLY');
-          $('.apply-button').removeClass('apply-button');
-        }
-      },
-      'json'
-    );
     url = '/ajax/recruiting_token/get_videos' + path[4];
     $.post(url, '', function(data) {
       if (data.data !== undefined && data.data.length > 0) {
@@ -371,6 +369,11 @@ function loadDataAndPopulateToken() {
           );
         }
       } else {
+        // expands main image for small screens
+        if ($(window).width() < 739) {
+          $('#location-secondary-images').remove();
+          $('#location-main-image').css('width','100%');
+        }
         $('#videos-frontpage').hide();
         $('#images-frontpage').removeClass('mdl-cell--6-col');
         $('#images-frontpage').addClass('mdl-cell--12-col');
@@ -975,6 +978,7 @@ function elementIsPresent(section_el) {
   return (section_el !== null) && (section_el.style.display !== 'none');
 }
 
+var addedName = false;
 /**
  * Handles the data return from /ajax/recruiting_token/get_responses_allowed
  *
@@ -985,15 +989,30 @@ function handleAjaxRecruitingTokenGetResponsedAllowed(data) {
     if ('false' == data.data.allowed) {
       $('.interest-fab').hide();
     } else {
-      // display the response form once after 10 seconds
-      if (!presentedInterestPopup) {
-        setTimeout(function(){
-          $('.interest-dialog').each(function (i, dialog){
-            dialog.open();
-          });
-        },
-        10000);
-        presentedInterestPopup = true;
+      if (!addedName && 'true' == data.data.collectName) {
+        var nameInput = '<paper-input';
+        nameInput += '  class="name-paper-input"';
+        nameInput += '  label="name"';
+        nameInput += '  autofocus';
+        nameInput += '  error-message="Please input your name"';
+        nameInput += '  required>';
+        nameInput += '</paper-input>';
+        $('.email-paper-input').after(nameInput);
+        addedName = true;
+      }
+      if ('true' == data.data.autoPop) {
+        // display the response form once after 10 seconds
+        if (!presentedInterestPopup) {
+          setTimeout(function(){
+            if (!presentedInterestPopup) {
+              $('.interest-dialog').each(function (i, dialog){
+                dialog.open();
+              });
+              presentedInterestPopup = true;
+            }
+          },
+          (data.data.autoPopDelay !== undefined ? data.data.autoPopDelay*1000 : 10000));
+        }
       }
     }
   }
