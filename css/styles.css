@@ -2359,7 +2359,10 @@ RESPONSIVE FIXES
     .features .feature .icon-container .icon {
         margin: auto;
     }
-
+    
+    .row .tab-pane .save-button {
+        margin: 0 !important;
+    }
 }
 
 @media (max-width: 480px) {
@@ -2453,4 +2456,63 @@ RESPONSIVE FIXES
 
 #light-free-link {
   color: black;
+}
+
+label.col-sm-1.control-label {
+    text-align: left;
+}
+
+.form-horizontal textarea {
+    height: 100px;
+    resize: none;
+}
+
+.status-message {
+    background: #1ac6ff;
+    bottom: 0;
+    color: #ffffff;
+    font-size: 16px;
+    height: 0;
+    left: 0;
+    line-height: 48px;
+    max-height: 48px;
+    position: fixed;
+    text-align: center;
+    transition: .3s ease all;
+    width: 100%;
+}
+
+.status-message.visible {
+    height: 48px;
+}
+
+.row .nopadding {
+    padding: 0;
+}
+
+.row .profile-title {
+    line-height: 3.125rem;
+    margin: 0 0 10px;
+}
+
+.row .img-circle {
+    border-radius: 4px;
+}
+
+.row .profile-buttons {
+    width: 200px;
+}
+
+.row .profile-buttons .btn {
+    width: 100%;
+}
+
+.row .tab-pane .save-button {
+    float: right;
+    margin: 0 8.3%;
+    width: 150px;
+}
+
+.row .form-horizontal .checkbox {
+    margin: 0 0 0 20px;
 }
