@@ -184,6 +184,7 @@ scope._onInterestClick4 = function (event) {
  * Submits interest info
  */
 scope._submitInterest = function (event) {
+  event.preventDefault();
   var formIndex = 0;
   var eventPath = [];
   openedInterestPopup = false;
@@ -206,11 +207,13 @@ scope._submitInterest = function (event) {
       eventPath.push(currentElem);
       currentElem = currentElem.parentElement;
     }
-    if (eventPath.indexOf(window) === -1 && eventPath.indexOf(document) === -1)
+    if (eventPath.indexOf(window) === -1 && eventPath.indexOf(document) === -1) {
       eventPath.push(document);
-    if (eventPath.indexOf(window) === -1)
+    }
+    if (eventPath.indexOf(window) === -1) {
       eventPath.push(window);
-    if (eventPath[8].localName == 'location-x-card') {
+    }
+    if (eventPath[9].localName == 'location-x-card' || eventPath[8].localName == 'location-x-card') {
       formIndex = 1;
     } else if (eventPath[5].localName == 'image-x-card') {
       formIndex = 2;
@@ -220,7 +223,6 @@ scope._submitInterest = function (event) {
       formIndex = 4;
     }
   }
-  event.preventDefault();
   if ($('.email-paper-input')[formIndex].validate()) {
     $('.submit-interest-button').addClass('disable-clicks');
     var response = $('#interest-response')[0].selectedItem.value;
