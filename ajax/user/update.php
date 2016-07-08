@@ -12,12 +12,16 @@ if (logged_in()) {
         $user->first_name = $_POST['first_name'] ?? null;
         $user->last_name = $_POST['last_name'] ?? null;
         $user->email_address = $_POST['email'] ?? null;
-        $user->location = $_POST['location'] ?? null;
-        $user->company = $_POST['company'] ?? null;
+        //$user->location = $_POST['location'] ?? null;
+       // $user->company = $_POST['company'] ?? null;
         $user->position = $_POST['position'] ?? null;
         $user->about = $_POST['about'] ?? null;
-        $user->username = $_POST['username'] ?? null;
-        $user->user_group = $_POST['group'] ?? null;
+        
+        if (isset($_POST['linkedin']) && strrpos($_POST['linkedin'], 'linkedin') > 0) {
+            $user->linkedin = $_POST['linkedin'];
+        }
+        //$user->username = $_POST['username'] ?? null;
+        //$user->user_group = $_POST['group'] ?? null;
         $user->allow_token_responses = $_POST['allow_token_responses'] ?? null;
         $user->receive_token_notifications = $_POST['receive_token_notifications'] ?? null;
 

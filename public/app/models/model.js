@@ -22,6 +22,18 @@ function getUser(){
    return user;
 }
 
+function getOrganization() {
+  var organization = null;
+  $.ajax({
+    url: "/ajax/user/get_organization",
+    async: false
+  }).done(function(data, textStatus, jqXHR){
+    organization = data;
+  });
+  
+  return organization;
+}
+
 function getTokens(){
   var tokens = null;
   $.ajax({
@@ -34,6 +46,7 @@ function getTokens(){
 }
 
 var user = getUser()[0];
+var organization = getOrganization()[0];
 var tokens = getTokens();
 for (i=0; i < tokens.length; i++){
   tokens[i].variant = "01";
@@ -48,18 +61,18 @@ var Model = {
   profile: {
     admin: user.admin,
     user_id: user.id,
-    new_password: null,
+    password: null,
+    face_image: user.face_image,
     first_name: user.first_name,
     last_name: user.last_name,
     level: user.level,
     level_text: user.user_level,
+    linkedin: user.linkedin,
     email: user.email_address,
     username: user.username ? user.username : "",
     name: user.first_name + " " + user.last_name,
     views: 'XX',
-    location: user.location,
     position: user.position,
-    company: user.company,
     about: user.about ? user.about : "",
     levels: [
       {1: "Free"},
@@ -70,24 +83,13 @@ var Model = {
     allow_token_responses: user.allow_token_responses,
     receive_token_notifications: user.receive_token_notifications
   },
+  
+  organization: {
+    name: organization.name,
+    website: organization.website
+  },
 
   tokens: tokens,
-
-  viewers: [
-    {id: 0, email:'username@yourdomain.com', firstName: 'John', lastName: 'Smith', type: 'viewer'},
-    {id: 1, email:'username@yourdomain.com', firstName: 'John', lastName: 'Smith', type: 'viewer'},
-    {id: 2, email:'username@yourdomain.com', firstName: 'John', lastName: 'Smith', type: 'viewer'},
-    {id: 3, email:'username@yourdomain.com', firstName: 'John', lastName: 'Smith', type: 'viewer'},
-    {id: 4, email:'username@yourdomain.com', firstName: 'John', lastName: 'Smith', type: 'viewer'},
-  ],
-
-  users: [
-    {id: 0, username: 'jsmith25', firstName: 'John', lastName: 'Smith'},
-    {id: 1, username: 'jsmith25', firstName: 'John', lastName: 'Smith'},
-    {id: 2, username: 'jsmith25', firstName: 'John', lastName: 'Smith'},
-    {id: 3, username: 'jsmith25', firstName: 'John', lastName: 'Smith'},
-    {id: 4, username: 'jsmith25', firstName: 'John', lastName: 'Smith'},
-  ],
 
   editing: null,
   removing: null,
@@ -115,6 +117,7 @@ var Model = {
     var response = null;
     this.profile.first_name = this.profile.name.split(' ')[0];
     this.profile.last_name = this.profile.name.substring(this.profile.name.indexOf(' ') + 1);
+    
     $.ajax({
       type: "POST",
       data: this.profile,
@@ -123,17 +126,12 @@ var Model = {
     }).done(function(data, textStatus, jqXHR){
       response = textStatus;
     });
-    if (this.profile.new_password) {
-      $.ajax({
-        type: "POST",
-        data: this.profile,
-        url: "/ajax/change_password",
-        async: false
-      }).done(function(data, textStatus, jqXHR){
-        response = textStatus;
-      });
-      alert("You have successfully changed your password");
-    }
+    
+    $('.status-message').html('Save successful').addClass('visible');
+    window.setTimeout(function () {
+      $('.status-message').removeClass('visible');
+    }, 3000);
   }
-
 };
+
+var State = Model;

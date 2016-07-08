@@ -1,6 +1,6 @@
 <?php
 if (logged_in()) {
-    $sql = "SELECT id, admin, first_name, last_name, email_address, position,
+    $sql = "SELECT id, admin, first_name, last_name, email_address, position, linkedin, face_image,
             about, receive_token_notifications, allow_token_responses
             from user where id = ".$_SESSION['user_id']." ORDER BY last_name";
     $results = execute_query($sql);
