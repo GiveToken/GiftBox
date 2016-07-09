@@ -23,6 +23,7 @@ npm-debug.log
 # Python #
 ##########
 /ajax/scraper/venv
+/ajax/scraper/__pycache__
 
 # Testing #
 ###########
