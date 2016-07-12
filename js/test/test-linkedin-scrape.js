@@ -5,7 +5,7 @@ var jsdom = require('mocha-jsdom');
 var chai = require('chai');
 var sinon = require('sinon');
 
-describe('scraper.js', function() {
+describe('linkedin-scraper.js', function() {
 
   // jquery setup
   jsdom();
