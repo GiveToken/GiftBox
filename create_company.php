@@ -410,6 +410,12 @@ require __DIR__.'/header.php';
         <paper-button id="glassdoor-submit-button" class="dialog-button" onclick="processGlassdoor()">Submit</paper-button>
         <paper-button id="glassdoor-cancel-button" class="dialog-button" onclick="cancelGlassdoor()" dialog-dismiss>Cancel</paper-button>
       </div>
+      <paper-dialog class="recruiting-dialog" id="glassdoor-alert-dialog" modal>
+        <h2>Warning</h2>
+        <p>"Select" will replace data already in the form</p>
+        <paper-button id="glassdoor-alert-ok">Ok</paper-button>
+        <paper-button id="glassdoor-alert-cancel">Cancel</paper-button>
+      </paper-dialog>
       <div id="glassdoor-progress">
         <paper-progress indeterminate></paper-progress>
       </div>
