@@ -497,7 +497,6 @@ function saveCompany() {
                     var ajax = 'ajax/';
                     img.data('linkedin') ? ajax += 'linkedin-scraper' : ajax += 'glassdoor-scraper';
                     uploadScrapedImage(ajax, img, img.data('name')+'.png', fileName);
-                    console.log(ajax);
                   } else {
                     uploadFile(file, fileName, img);
                   }

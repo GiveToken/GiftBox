@@ -258,7 +258,6 @@ function uploadScrapedImage(ajax, image, oldName, newName) {
       if (data['success']) {
         saveScrapedImage(image, newName);
       }
-      console.log(data);
     },
     error: function(xhr, status, error) {
       console.error(error);

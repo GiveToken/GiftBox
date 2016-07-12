@@ -126,7 +126,6 @@ function _addGlassdoorData() {
 }
 
 function addGlassdoorImage() {
-  console.log(glassdoorData);
   var img = null;
   var key = glassdoorData['key'];
   if (glassdoorData['image'].length > 0) {
