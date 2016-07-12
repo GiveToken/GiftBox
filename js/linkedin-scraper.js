@@ -209,6 +209,7 @@ function addImages() {
       img.data('name', images[i] + '-' + key);
       img.data('saved', false);
       img.data('scraped', true);
+      img.data('linkedin', true);
       createThumbnail(img, 'company-image-container');
     }
   }
@@ -231,16 +232,17 @@ function addURL() {
  * @param {String} oldName default name of image
  * @param {String} newName unique identifier of image
  */
-function uploadScrapedImage(image, oldName, newName) {
+function uploadScrapedImage(ajax, image, oldName, newName) {
   $.ajax({
     type: 'POST',
     dataType: 'json',
-    url: 'ajax/linkedin-scraper',
+    url: ajax,
     data: {'oldName': oldName, 'newName': newName},
     success: function(data, status) {
       if (data['success']) {
         saveScrapedImage(image, newName);
       }
+      console.log(data);
     },
     error: function(xhr, status, error) {
       console.error(error);
