@@ -77,7 +77,7 @@ function openGlassdoor(cname) {
           dataType: 'json',
           data: {'link': glassdoorData['image']},
           success: function(d) {
-            glassdoorData['key'] = d['data'];
+            glassdoorData['key'] = d['key'];
           },
           error: function(x, s, e) {
             console.error(e);
