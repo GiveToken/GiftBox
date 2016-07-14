@@ -3,7 +3,6 @@ var fs = require('fs');
 var vm = require('vm');
 var jsdom = require('mocha-jsdom');
 var chai = require('chai');
-var sinon = require('sinon');
 
 describe('glassdoor-scraper.js', function() {
 
@@ -15,7 +14,6 @@ describe('glassdoor-scraper.js', function() {
 
   // set up document
   var doc = require('jsdom').jsdom;
-  var clock = sinon.useFakeTimers();
 
   document = doc(fs.readFileSync('/Library/Webserver/Documents/GiftBox/create_company.php'));
 
@@ -31,10 +29,6 @@ describe('glassdoor-scraper.js', function() {
     });
   });
   */
-
-  beforeEach(function() {
-    clock.restore();
-  });
 
   describe('defaults', function() {
     it('should not have the progress bar open by deafult', function() {
