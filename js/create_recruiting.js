@@ -494,7 +494,9 @@ function saveCompany() {
                   img.data('file_name', fileName);
 
                   if (img.data('scraped')) {
-                    uploadScrapedImage(img, img.data('name')+'.png', fileName);
+                    var ajax = 'ajax/';
+                    img.data('linkedin') ? ajax += 'linkedin-scraper' : ajax += 'glassdoor-scraper';
+                    uploadScrapedImage(ajax, img, img.data('name')+'.png', fileName);
                   } else {
                     uploadFile(file, fileName, img);
                   }

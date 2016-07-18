@@ -348,6 +348,14 @@ require __DIR__.'/header.php';
               USE EXISTING COMPANY
             </paper-button>
           </div>
+          <div class="button-container">
+            <glassdoor-scraper></glassdoor-scraper>
+          </div>
+          <div class="button-container">
+            <paper-button raised onclick="initGlassdoor()" id="glassdoor-init">
+              IMPORT FROM GLASSDOOR
+            </paper-button>
+          </div>
           <!--
           <div class="button-container">
             <paper-button raised onclick="initLinkedIn()" id="linkedin-scrape-button">
@@ -404,6 +412,24 @@ require __DIR__.'/header.php';
 
     </paper-dialog>
 
+    <paper-dialog class="recruiting-dialog" id="glassdoor-dialog" modal>
+      <h2>Import company information from Glassdoor</h2>
+      <paper-input id="glassdoor-cname" label="Enter your company's name" autofocus></paper-input>
+      <div class="buttons">
+        <paper-button id="glassdoor-submit-button" class="dialog-button" onclick="processGlassdoor()">Submit</paper-button>
+        <paper-button id="glassdoor-cancel-button" class="dialog-button" onclick="cancelGlassdoor()" dialog-dismiss>Cancel</paper-button>
+      </div>
+      <paper-dialog class="recruiting-dialog" id="glassdoor-alert-dialog" modal>
+        <h2>Warning</h2>
+        <p>"Select" will replace data already in the form</p>
+        <paper-button id="glassdoor-alert-ok">Ok</paper-button>
+        <paper-button id="glassdoor-alert-cancel">Cancel</paper-button>
+      </paper-dialog>
+      <div id="glassdoor-progress">
+        <paper-progress indeterminate></paper-progress>
+      </div>
+    </paper-dialog>
+
     <paper-dialog class="recruiting-dialog" id="video-dialog" modal>
         <h2>Upload video from web address</h2>
         <paper-input id="video-dialog-url" label="Paste video embed URL here" autofocus></paper-input>
@@ -432,6 +458,7 @@ require __DIR__.'/header.php';
     <script src="js/create_common.min.js?v=<?php echo VERSION;?>"></script>
     <script src="js/create_recruiting.min.js?v=<?php echo VERSION;?>"></script>
     <script src="js/linkedin-scraper.min.js?v=<?php echo VERSION;?>"></script>
+    <script src="js/glassdoor-scraper.min.js?v=<?php echo VERSION;?>"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script>
     /**

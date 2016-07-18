@@ -1,9 +1,16 @@
 #!/bin/sh
-# runs the python scraper
+# runs the scrapers
 
 if [ "$#" -gt 0 ]
 then
   source venv/bin/activate
-  python3.4 linkedin.py $1
+  if [ $1 == 'glassdoor' ]
+  then
+    python3 glassdoor.py $2
+  fi
+  if [ $1 == 'linkedin' ]
+  then
+    python3 linkedin.py $2
+  fi
   deactivate
 fi
