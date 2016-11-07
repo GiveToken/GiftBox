@@ -25,8 +25,6 @@ if (logged_in()) {
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
 
-  <?php require_once __DIR__."/../analyticstracking.php" ?>
-
   <!-- Polymer -->
   <script src="/components/webcomponentsjs/webcomponents-lite.min.js"></script>
   <link rel="import" href="/components/paper-button/paper-button.html">
@@ -193,7 +191,7 @@ if (logged_in()) {
                 <span class="heading">OUR SYSTEM RUNS</span>
                 <p class="thin" >Sit tight while our system processes<br />
                   the job description you just sent us.<br />
-              
+
                 </p>
               </article>
               <!--<span class="icon icon-arrows-04"></span>-->
