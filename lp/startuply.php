@@ -1,8 +1,3 @@
-<?php
-if (logged_in()) {
-    header('Location: /profile');
-}
-?>
 <!doctype html>
 <html lang="en">
 <head>
